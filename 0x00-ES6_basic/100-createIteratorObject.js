@@ -9,7 +9,7 @@ export default function createIteratorObject(report) {
         const employees = departments[departmentIndex];
         if (employeeIndex < employees.length) {
           const result = { value: employees[employeeIndex], done: false };
-	  employeeIndex += 1;
+          employeeIndex += 1;
           return result;
         }
         // move to the next department
