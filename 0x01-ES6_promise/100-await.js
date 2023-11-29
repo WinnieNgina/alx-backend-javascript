@@ -4,9 +4,10 @@ export default async function asyncUploadUser() {
   try {
     const user = createUser();
     const photo = uploadPhoto();
+    const [resolvedPhoto, resolvedUser] = await Promise.all([photo, user]);
     return {
-      photo,
-      user,
+      photo: resolvedPhoto,
+      user: resolvedUser,
     };
   } catch (error) {
     return {
