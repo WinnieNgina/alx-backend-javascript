@@ -1,18 +1,16 @@
 export default function cleanSet(set, startString) {
-  if (startString === '') {
+  // Check if set is not an object, or startString is not a string, or startString is empty
+  if (typeof set !== 'object' || typeof startString !== 'string' || startString.length === 0) {
     return '';
   }
 
-  let result = '';
+  const list = [];
 
-  set.forEach((value) => {
-    if (value.startsWith(startString)) {
-      if (result !== '') {
-        result += '-';
-      }
-      result += value.substring(startString.length);
+  for (const item of set) {
+    if (typeof item === 'string' && item.startsWith(startString)) {
+      list.push(item.slice(startString.length));
     }
-  });
+  }
 
-  return result;
+  return list.join('-');
 }
