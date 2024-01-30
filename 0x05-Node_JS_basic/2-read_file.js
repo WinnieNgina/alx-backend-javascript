@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function countStudents (path) {
+function countStudents(path) {
   if (fs.existsSync(path)) {
     try {
       const data = fs.readFileSync(path, 'utf8');
@@ -12,7 +12,7 @@ function countStudents (path) {
       const fieldCounts = {};
 
       // Iterate through each row starting from index 1
-      for (let i = 1; i < rows.length; i++) {
+      for (let i = 1; i < rows.length; i += 1) {
         // Split the row into fields
         const [firstname, lastname, age, field] = rows[i].split(',');
 
@@ -27,13 +27,15 @@ function countStudents (path) {
       console.log(`Number of students: ${Object.values(fieldCounts).reduce((acc, count) => acc + count, 0)}`);
 
       // Log the number of students in each field
-      for (const field in fieldCounts) {
-        const count = fieldCounts[field];
-        const studentsList = rows
-          .slice(1) // Skip the header
-          .filter((row) => row.split(',')[3] === field)
-          .map((row) => row.split(',')[0]);
-        console.log(`Number of students in ${field}: ${count}. List: ${studentsList.join(', ')}`);
+      for (const field of Object.keys(fieldCounts)) {
+        if (Object.prototype.hasOwnProperty.call(fieldCounts, field)) {
+          const count = fieldCounts[field];
+          const studentsList = rows
+            .slice(1) // Skip the header
+            .filter((row) => row.split(',')[3] === field)
+            .map((row) => row.split(',')[0]);
+          console.log(`Number of students in ${field}: ${count}. List: ${studentsList.join(', ')}`);
+        }
       }
     } catch (error) {
       console.error(error.message);
