@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function countStudents(path) {
+function countStudents (path) {
   if (fs.existsSync(path)) {
     try {
       const data = fs.readFileSync(path, 'utf8');
@@ -39,7 +39,7 @@ function countStudents(path) {
       console.error(error.message);
     }
   } else {
-    throw new Error("Cannot load the database");
+    throw new Error('Cannot load the database');
   }
 }
 
